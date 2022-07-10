@@ -14,5 +14,14 @@ Setup VoiceAttack for referencing in .Net Projects.
   current VoiceAttack version. Changing this value will invalidate the cache
   and force a re-download. Default: `0`.
 
+## Example
+
+```yaml
+- name: Install VoiceAttack
+  uses: alterNERDtive/setup-voiceattack-action
+  with:
+    version: "1.10"
+```
+
 [![GitHub Sponsors](https://img.shields.io/github/sponsors/alterNERDtive?style=for-the-badge)](https://github.com/sponsors/alterNERDtive)
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/S6S1DLYBS)
