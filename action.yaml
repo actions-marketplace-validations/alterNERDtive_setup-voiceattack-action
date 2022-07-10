@@ -8,40 +8,40 @@ description: "Setup VoiceAttack for referencing in .Net projects"
 inputs:
   path:
     description: "Installation path"
-    required: false
+    required: 'false'
     default: "C:\\Program Files\\VoiceAttack"
   beta:
     description: "Install current beta version"
-    required: false
-    default: false
+    required: 'false'
+    default: 'false'
   version:
     descrpition: "VoiceAttack “version” you can use to invalidate the cache"
-    required: false
+    required: 'false'
     default: 0
 
 runs:
   using: "composite"
   steps:
     - name: "Cache VoiceAttack installer"
-      id: "cache-va"
+      id: "cache"
       uses: actions/cache@v3
       env:
-        cache-name: "voiceattack"
+        cache-name: "voiceattack-test2"
       with:
         path: ${{ inputs.path }}
         key: ${{ env.cache-name }}-${{ inputs.version }}
 
     - name: "Download beta installer"
-      if: ${{ !steps.cache-va.outputs.cache-hit && inputs.beta }}
+      if: ${{ (steps.cache.outputs.cache-hit == 'false') && (inputs.beta == 'true') }}
       run: curl.exe -o VoiceAttackSetup.exe https://voiceattack.com/FileSend.aspx?id=VoiceAttackInstaller64__Beta.exe
       shell: pwsh
 
     - name: "Download installer"
-      if: ${{ !steps.cache-va.outputs.cache-hit && !inputs.beta }}
+      if: ${{ (steps.cache.outputs.cache-hit == 'false') && (inputs.beta == 'false') }}
       run: curl.exe -o VoiceAttackSetup.exe https://voiceattack.com/FileSend.aspx?id=VoiceAttackInstaller64.exe
       shell: pwsh
 
     - name: "Install VoiceAttack"
-      if: ${{ !steps.cache-va.outputs.cache-hit }}
+      if: steps.cache.outputs.cache-hit == 'false'
       run: Start-Process -FilePath .\VoiceAttackSetup.exe -Wait -Argumentlist "/sp- /verysilent /dir=""${{ inputs.path }}"" /suppressmsgboxes /norestart /nocloseapplications /norestartapplications /noicons"
       shell: pwsh

@@ -2,6 +2,10 @@
 
 Setup VoiceAttack for referencing in .Net Projects.
 
+Downloads the VoiceAttack installer from the official website and installs it
+on the worker. The installation folder is cached for future runs to increase
+performance and minimize traffic caused for the VoiceAttack download site.
+
 ## Usage
 
 ### Inputs
