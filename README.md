@@ -22,7 +22,7 @@ performance and minimize traffic caused for the VoiceAttack download site.
 
 ```yaml
 - name: Install VoiceAttack
-  uses: alterNERDtive/setup-voiceattack-action
+  uses: alterNERDtive/setup-voiceattack-action@v1
   with:
     version: "1.10"
 ```
